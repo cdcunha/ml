@@ -18,17 +18,17 @@ for iter = 1:num_iters
     %
 
     h = X*theta; %The hypothesis is a vector, formed by multiplying the X matrix and the theta vector.
-    errors_vector = h - y; %difference between the 'h' vector and the 'y' vector
     
-    % 3-The change in theta (the "gradient") is the sum of the product of X and the "errors vector", scaled by alpha and 1/m. 
-    % Since X is (m x n), and the error vector is (m x 1), and the result you want is the same size as theta (which is (n x 1), 
-    % you need to transpose X before you can multiply it by the error vector.
-    % 
-    % The vector multiplication automatically includes calculating the sum of the products.
-    % 
-    % When you're scaling by alpha and 1/m, be sure you use enough sets of parenthesis to get the factors correct.
-    theta_change = (alpha* 1/m) * sum(X' * errors_vector);
-    % 4 - Subtract this "change in theta" from the original value of theta. A line of code like this will do it:
+    errors = h - y; %difference between the 'h' vector and the 'y' vector
+    
+    %% The gradient computation would then be X' * error, 
+    %% because the size of X' is (n x m), and the error vector is (m x 1). 
+    %% The sum of the products is automatically computed, 
+    %% and this gives you a (n x 1) result. 
+    %% That's exactly what you want (it is the same size as theta).
+    %% Font: Tom MosherMentor · 3 years ago · Edited
+    
+    theta_change = (alpha / m) * (X' * errors);
     theta = theta - theta_change;
     
     % ============================================================
@@ -37,5 +37,4 @@ for iter = 1:num_iters
     J_history(iter) = computeCost(X, y, theta);
 
 end
-
 end
