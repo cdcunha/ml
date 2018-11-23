@@ -24,7 +24,7 @@ J = (-1/m * sum((y.*log(h)) + ((1-y) .* log(1-h)))) + ((lambda/(2*m)) * (sum(pow
 grad(1) = (1/m) .* sum((h-y) .* X(:,1));
 for i = 2:numel(theta)
   grad(i) = ((1/m) .* sum((h-y) .* X(:,i))) + (lambda/m)*theta(i);
-endfor
+end
 
 % =============================================================
 
